@@ -1,6 +1,6 @@
-Feature("https://practice.automationtesting.in/");
+Feature("Home Page");
 
-Scenario("test", ({ I }) => {
+Scenario("Home page with three sliders only", ({ I }) => {
   I.amOnPage("https://practice.automationtesting.in");
   I.wait(5);
   I.click('//a[contains(text(),"Shop")]');
