@@ -1,13 +1,485 @@
-Feature("Home Page");
+ const assert=require('assert');
+ Feature("Home Page");
 
-Scenario("Home page with three sliders only", ({ I }) => {
+Scenario("1.Home page with three sliders only", async({ I }) => {
   I.amOnPage("https://practice.automationtesting.in");
-  I.wait(5);
+  I.wait(3);
   I.click('//a[contains(text(),"Shop")]');
-  I.wait(5);
+  I.wait(3);
   I.click('//a[contains(text(), "Home")]');
-  I.wait(5);
-  I.click('//div[@id="n2-ss-6-arrow-next"]');
-  I.click('//div[@id="n2-ss-6-arrow-next"]');
-  I.click('//div[@id="n2-ss-6-arrow-next"]');
+  I.wait(3);
+  
+  let numOfSliders = await I.grabNumberOfVisibleElements('//img[@data-x="50"]');
+  console.log(numOfSliders==3);
+await assert.equal(numOfSliders,3);
 });
+
+ Scenario("2.Home page with three arrivals only", async({ I }) => {
+  I.amOnPage("https://practice.automationtesting.in");
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(), "Home")]');
+  I.wait(3);
+let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+console.log(numOfArrivals==3);
+await assert.equal(numOfArrivals,3);
+ });
+
+ Scenario("3.Home page - Images in Arrivals should navigate", async({ I }) => {
+I.amOnPage('https://practice.automationtesting.in');
+I.wait(3);
+I.click('//a[contains(text(),"Shop")]');
+I.wait(3);
+I.click('//a[contains(text(),"Home")]');
+I.wait(3);
+let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+console.log(numOfArrivals==3);
+await assert.equal(numOfArrivals,3);
+I.wait(2);
+I.click('//img[@title="Selenium Ruby"]');
+I.wait(2);
+I.click('//a[contains(text(),"Shop")]');
+I.wait(2);
+I.click('//a[contains(text(),"Home")]');
+I.waitForNavigation({});
+I.wait(5);
+I.click('//img[@title="Thinking in HTML"]');
+I.wait(2);
+I.click('//a[contains(text(),"Shop")]');
+I.wait(3);
+I.click('//a[contains(text(),"Home")]');
+I.waitForNavigation({});
+I.wait(3);
+I.click('//img[@title="Mastering JavaScript"]');
+I.wait(2);
+ });
+
+ Scenario("4.Home page - Arrivals-Images-Description", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Selenium Ruby"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.see('Product Description');
+  I.wait(1);
+ });
+
+ Scenario("5.Home page - Arrivals-Images-Review", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Selenium Ruby"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//a[contains(text(),"Reviews (0)")]');
+  I.wait(1);
+  I.see('Reviews');
+  I.wait(1);
+ });
+
+ Scenario("6.Home page - Arrivals-Images-Add to Basket", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  // I.waitForClickable
+  I.click('//img[@title="Selenium Ruby"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Selenium Ruby');
+  I.wait(1);
+  I.see('₹500.00');
+  I.wait(1);
+ });
+
+ Scenario("7.Home page - Arrivals-Add to Basket with more books", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Selenium Ruby"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Selenium Ruby');
+  I.wait(1);
+  I.see('₹500.00');
+  I.wait(1);
+  I.fillField('//input[@type="number"]', '8706');
+  I.wait(2);
+  I.click('//input[@name="update_cart"]');
+  pause();
+  I.see('Value must be less than or equal to 8705');
+  I.wait(1);
+ });
+
+//  Scenario 8 is covered in previous Scenario, therefore skipping this 
+//  Scenario("8.Home page - Arrivals-Add to Basket with more books", ({ I }) => {
+//  });  
+ 
+
+Scenario("9.Home-Arrivals-Add to Basket-Items-Coupon", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Selenium Ruby"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Selenium Ruby');
+  I.wait(1);
+  I.see('₹500.00');
+  I.wait(1);
+  I.fillField('//input[@name="coupon_code"]','krishnasakinala');
+  I.wait(3);
+  I.click('//input[@name="apply_coupon"]');
+  I.wait(1);
+  I.see('Coupon code applied successfully.');
+  I.wait(2);
+ });
+
+Scenario("10.Home-Arrivals-Add to Basket-Items-Coupon<450", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.fillField('//input[@name="coupon_code"]','krishnasakinala');
+  I.wait(3);
+  I.click('//input[@name="apply_coupon"]');
+  I.wait(1);
+  I.see('The minimum spend for this coupon is ₹450.00.');
+  I.wait(2);
+ });
+
+Scenario("11.Home-Arrivals-Add to Basket-Items-Remove book", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.click('//a[@title="Remove this item"]');
+  I.wait(2);
+ });
+
+Scenario("12.Home-Arrivals-Add to Basket-Items-Add book", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.fillField('//input[@title="Qty"]','2');
+  I.wait(2);
+  I.click('//input[@value="Update Basket"]');
+  I.wait(2);
+ });
+
+Scenario("13.Home-Arrivals-Add to Basket-Items-Check-out-Book Final Price", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.see('Total');
+  I.wait(1);
+  I.see('₹357.00');
+  I.wait(1);
+ });
+
+// Scenario 14 has been covered in Scenario 12, therefore skipping this.
+// Scenario("14.Home-Arrivals-Add to Basket-Items-Check-out-Update Basket", async({ I }) => { 
+//  });
+
+
+Scenario("15.Home-Arrivals-Add to Basket-Items-Check-out-Total & Sub-total condition", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.see('Total');
+  I.wait(1);
+  I.see('Subtotal');
+  I.wait(1);
+ });
+
+
+Scenario("16.Home-Arrivals-Add to Basket-Items-Check-out functionality", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.see('Total');
+  I.wait(1);
+  I.see('Subtotal');
+  I.wait(1);
+  I.click('//a[contains(text(), "Proceed to Checkout")]');
+  I.wait(3);
+ });
+
+
+Scenario("17.Home-Arrivals-Add to Basket-Items-Check-out-Payment Gateway ", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.see('Total');
+  I.wait(1);
+  I.see('Subtotal');
+  I.wait(1);
+  I.click('//a[contains(text(), "Proceed to Checkout")]');
+  I.wait(3);
+  I.fillField('//input[@id="billing_first_name"]','Nitish');
+  I.wait(1);
+  I.fillField('//input[@id="billing_last_name"]','Kumar');
+  I.wait(2);
+  I.fillField('//input[@id="billing_company"]','Crowdstaffing');
+  I.wait(2);
+  I.fillField('//input[@id="billing_email"]','nitishk@crowdstaffing.com');
+  I.wait(2);
+  I.fillField('//input[@id="billing_phone"]','+91 7980268083');
+  I.wait(2);
+  I.see('India');
+  I.wait(2);
+  I.fillField('//input[@placeholder="Street address"]', '26,kalu street lane');
+  I.wait(2);
+  I.fillField('//input[@id="billing_city"]','Kolkata');
+  I.wait(2);
+  I.see('Telangana');
+  I.wait(2);
+  I.fillField('//input[@name="billing_postcode"]','700036');
+  I.wait(2);
+  I.click('//input[@value="cod"]');
+  I.wait(2);
+  I.click('//input[@id="place_order"]');
+  I.wait(2);
+ });
+
+
+Scenario("18.Home-Arrivals-Add to Basket-Items-Check-out-Payment Gateway-Place Order ", async({ I }) => {
+  I.amOnPage('https://practice.automationtesting.in');
+  I.wait(3);
+  I.click('//a[contains(text(),"Shop")]');
+  I.wait(3);
+  I.click('//a[contains(text(),"Home")]');
+  I.waitForNavigation({});
+  I.wait(3);
+  let numOfArrivals = await I.grabNumberOfVisibleElements('//img[@sizes="(max-width: 300px) 100vw, 300px"]');
+  console.log(numOfArrivals==3);
+  await assert.equal(numOfArrivals,3);
+  I.wait(2);
+  I.click('//img[@title="Mastering JavaScript"]');
+  I.waitForNavigation({});
+  I.wait(2);
+  I.click('//button[contains(text(), "Add to basket")]');
+  I.wait(1);
+  I.click('//a[contains(text(), "View Basket")]');
+  I.wait(1);
+  I.see('Mastering JavaScript');
+  I.wait(1);
+  I.see('₹350.00');
+  I.wait(1);
+  I.see('Total');
+  I.wait(1);
+  I.see('Subtotal');
+  I.wait(1);
+  I.click('//a[contains(text(), "Proceed to Checkout")]');
+  I.wait(3);
+  I.fillField('//input[@id="billing_first_name"]','Nitish');
+  I.wait(1);
+  I.fillField('//input[@id="billing_last_name"]','Kumar');
+  I.wait(2);
+  I.fillField('//input[@id="billing_company"]','Crowdstaffing');
+  I.wait(2);
+  I.fillField('//input[@id="billing_email"]','nitishk@crowdstaffing.com');
+  I.wait(2);
+  I.fillField('//input[@id="billing_phone"]','+91 7980268083');
+  I.wait(2);
+  I.see('India');
+  I.wait(2);
+  I.fillField('//input[@placeholder="Street address"]', '26,kalu street lane');
+  I.wait(2);
+  I.fillField('//input[@id="billing_city"]','Kolkata');
+  I.wait(2);
+  I.see('Telangana');
+  I.wait(2);
+  I.fillField('//input[@name="billing_postcode"]','700036');
+  I.wait(2);
+  I.click('//input[@value="cod"]');
+  I.wait(2);
+  I.click('//input[@id="place_order"]');
+  I.wait(5);
+ });
+
+
